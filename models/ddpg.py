@@ -58,7 +58,7 @@ def ddpg(env: UnityEnvironment, agent=None, n_episodes=5000, max_t=2000, eps_sta
         if i_episode % 100 == 0 or np.mean(scores_window) >= target:
             print(score_log(i_episode, scores_window, scores) + '\tSaved!')
             agent.save()
-            if np.max(scores_window) >= 0.5:
+            if np.mean(scores_window) >= 0.5:
                 break                               # Finish the execution if the target is achieved
 
     return all_scores, agent

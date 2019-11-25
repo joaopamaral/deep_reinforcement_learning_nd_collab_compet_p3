@@ -45,7 +45,7 @@ class DDPGAgent:
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed, device)
 
         # add OU noise for exploration
-        self.noise = OUNoise(action_size)
+        self.noise = OUNoise(action_size, scale=1.0, sigma=.1)
 
     def reset(self):
         self.noise.reset()

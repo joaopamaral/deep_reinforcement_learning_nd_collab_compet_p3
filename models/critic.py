@@ -8,7 +8,7 @@ from models.helper import hidden_init
 class Critic(nn.Module):
     """Critic (Value) Model."""
 
-    def __init__(self, state_size, action_size, seed, fcs1_units=300, fc2_units=200):
+    def __init__(self, state_size, action_size, seed, fcs1_units=400, fc2_units=300):
         """Initialize parameters and build model.
         Params
         ======
