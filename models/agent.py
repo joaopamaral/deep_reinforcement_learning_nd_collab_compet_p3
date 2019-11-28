@@ -4,14 +4,14 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 from unityagents import UnityEnvironment
-from models.OUNoise import OUNoise
+from models.OUNoise import OUNoise   # add OU noise for exploration
 from models.actor import Actor
 from models.critic import Critic
 from models.helper import path_result_folder
 from models.parameters import device, LR_ACTOR, LR_CRITIC, BUFFER_SIZE, BATCH_SIZE, GAMMA, TAU, WEIGHT_DECAY, \
     LEARN_STEPS, N_UPDATES
 from models.replay_buffer import ReplayBuffer
-# add OU noise for exploration
+
 
 
 class DDPGAgent:
@@ -70,7 +70,6 @@ class DDPGAgent:
             actions = self.actor_local(states).cpu().data.numpy()
         self.actor_local.train()
         if add_noise:                           # add a noise (based on normal distribution) to exploration
-            # actions += np.random.normal(0, .3) * epsilon
             actions += self.noise.noise() * epsilon
 
         return np.clip(actions, -1, 1)

@@ -64,7 +64,7 @@ def ddpg(env: UnityEnvironment, agent=None, n_episodes=5000, max_t=2000, eps_sta
     return all_scores, agent
 
 
-def run_single_episode(env: UnityEnvironment, brain_name, agent: DDPGAgent=None, train_mode=False, max_t=2000, epsilon=0.0):
+def run_single_episode(env: UnityEnvironment, brain_name, agent: DDPGAgent=None, train_mode=False, max_t=3000, epsilon=0.0):
     """
     Execute a single episode
 

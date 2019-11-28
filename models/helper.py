@@ -1,5 +1,4 @@
 import os
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,24 +11,15 @@ def hidden_init(layer):
 
 
 def plot_result(scores):
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
-
-    pd.DataFrame(scores).mean(axis=1).rolling(100, min_periods=1).mean().plot(ax=ax1, color='b')
-    ax1.plot(np.arange(len(scores)), np.repeat(30, len(scores)), color='y')
-    ax1.legend(['Moving Avg (100 episodes)', 'Target'])
-    ax1.set_ylabel('Score')
-    ax1.set_xlabel('Episode #')
-    ax1.set_title('Moving Average (100 episodes window) ')
-
-    ax2.plot(np.arange(len(scores)), np.mean(scores, axis=1), color='b')
-    ax2.plot(np.arange(len(scores)), np.max(scores, axis=1), color='g')
-    ax2.plot(np.arange(len(scores)), np.min(scores, axis=1), color='r')
-    ax2.plot(np.arange(len(scores)), np.repeat(30, len(scores)), color='y')
-    ax2.fill_between(np.arange(len(scores)), np.max(scores, axis=1), np.min(scores, axis=1), alpha=0.5)
-    ax2.legend(['Mean', 'Max', 'Min', 'Target'])
-    ax2.set_ylabel('Score')
-    ax2.set_xlabel('Episode #')
-    ax2.set_title('Episodes Statistics')
+    """Plot result chart"""
+    fig, ax = plt.subplots(figsize=(10, 7))
+    pd.DataFrame(scores).max(axis=1).plot(color='b', ax=ax)
+    pd.DataFrame(scores).max(axis=1).rolling(100, min_periods=1).mean().plot(color='orange', ax=ax)
+    ax.plot(np.arange(len(scores)), np.repeat(.5, len(scores)), color='r')
+    ax.legend(['Episode Max Score', 'Moving Avg (100 episodes)', 'Target'])
+    ax.set_ylabel('Score')
+    ax.set_xlabel('Episode #')
+    ax.set_title('Moving Average (100 episodes window) ')
 
 
 def path_result_folder(file_name):
